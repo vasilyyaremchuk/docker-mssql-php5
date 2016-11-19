@@ -2,10 +2,12 @@ FROM ppoffice/mssql-odbc
 MAINTAINER PPOffice <ppoffice_2008@163.com>
 
 RUN apt-get update && \
-    apt-get -y install apache2 php5 php5-mssql && \
+    apt-get -y install apache2 php5 php5-mssql libpng12-dev libjpeg-dev libpq-dev && \
+    apt-get -y install php5-gd php5-mcrypt php5-curl php5-mysql && \
+    rm -rf /var/lib/apt/lists/* && \
     apt-get -y autoremove && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*  
 
 RUN /usr/sbin/a2enmod rewrite
 RUN php5enmod mssql
